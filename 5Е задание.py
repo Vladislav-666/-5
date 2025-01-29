@@ -153,25 +153,22 @@ print('Всё ок')
 
 #4Е Задание
 def scrabble(word):
-    points = 0 # задаем вес для точки
-    for char in word:
-        char = char.lower()  # создаем пустой
-        if char in 'авеинорстё': # вводим значения для каждой группы букв
-            points += 1  # присваиваем вес конкретному символу
-        elif char in 'дклмпу':
-            points += 2
-        elif char in 'бгья':
-            points += 3
-        elif char in 'йы':
-            points += 4
-        elif char in 'жзхцч':
-            points += 5
-        elif char in 'фшэю':
-            points += 8
-        elif char == 'щ':
-            points += 10
-        elif char == 'ъ':
-            points += 15
+    points = 0
+    points_dict = {
+        1: "авеинорстё",
+        2: "дклмпу",
+        3: "бгья",
+        4: "йы",
+        5: "жзхцч",
+        8: "фшэю",
+        10: "щ",
+        15: "ъ"
+    } # Словарем, как просилис)
+    for letter in word:   # перебераем буквы слова
+        for point, letters in points_dict.items(): # перебираем пары из словаря
+            if letter in letters: # проверяем к какому очку предаблежит буква 
+                points += point # добавляем очко буквы
+                break  # поврторяем все что выше на следующей буквке
     return points
 
 data = ["курс", 'авеинорстё', 'дклмпеу', 'бгья', 'йы', 'жзхцч', 'фшэю', 'щъ', "карабасбарабас", "околоводопроводного",
@@ -182,5 +179,4 @@ test_data = [6, 10, 13, 12, 8, 25, 32, 25, 21, 26, 20, 54, 34, 36]
 for i, d in enumerate(data):
     assert scrabble(d) == test_data[i], f'С набором {d} есть ошибка, не проходит проверку'
     print(f'Тестовый набор {d} прошёл проверку')
-print('Всё ок')
-  
+print('Всё ок')  
